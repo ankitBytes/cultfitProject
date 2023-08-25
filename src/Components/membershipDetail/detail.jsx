@@ -47,7 +47,7 @@ const Detail = () => {
             margin: "20vh 0",
           }}
         >
-          <Grid item md={3.5}>
+          <Grid item md={3.5} xs={8}>
             <img
               src="https://cdn-images.cure.fit/www-curefit-com/image/upload/c_fill,w_630,q_auto:eco,dpr_3,f_auto,fl_progressive/image/test/image_zoom_widget/image_zoom_widget_img_3.png"
               alt=""
@@ -56,7 +56,7 @@ const Detail = () => {
               data-aos-duration="1500"
             />
           </Grid>
-          <Grid item md={3.5}>
+          <Grid item md={3.5} xs={8}>
             <img
               src="https://cdn-images.cure.fit/www-curefit-com/image/upload/c_fill,w_630,q_auto:eco,dpr_2,f_auto,fl_progressive/image/test/image_zoom_widget/image_zoom_widget_img_4.png"
               alt=""
@@ -65,7 +65,7 @@ const Detail = () => {
               data-aos-duration="1500"
             />
           </Grid>
-          <Grid item md={3.5}>
+          <Grid item md={3.5} xs={8}>
             <img
               src="https://cdn-images.cure.fit/www-curefit-com/image/upload/c_fill,w_630,q_auto:eco,dpr_2,f_auto,fl_progressive/image/test/image_zoom_widget/image_zoom_widget_img_5.png"
               alt=""
@@ -166,14 +166,6 @@ const Detail = () => {
           </Grid>
         </Box>
       </Grid>
-      <Grid item md={12}>
-              <Typography textAlign={"center"} sx={{
-                textAlign: "center",
-                background: '#fafafa'
-              }}>
-                One membership for all your fitness needs
-              </Typography>
-            </Grid>
     </Box>
   );
 };

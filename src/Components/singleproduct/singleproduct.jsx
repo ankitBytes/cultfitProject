@@ -1,102 +1,269 @@
-import React from 'react';
-import "./style.css"
-import AddToCartButton from './AddToCartButton';
-import BuyNowButton from './BuynowButton';
-import Navbar from '../navbar/storeNavbar';
-import PrimaryFooter from "../../Components/Footer/primaryFooter"
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-const Singleproduct= () => {
-  const product = {
-    mname:'RPM FITNESS BY CULT.SPORT',
-    name: 'RPM Active1100DC Motorised Treadmill, Maximum weight: 140 Kgs, 5HP Peak',
-    description: ' The RPM Fitness by Cult.sport Active 1100DC Treadmill is a high-quality fitness equipment designed for intensive workouts. It features a powerful 5HP peak motor, ensuring a smooth and consistent performance. With a maximum weight capacity of 140kg, it accommodates a wide range of users. This treadmill provides 15 inclination levels that helps to personalize your workout. The treadmill being motorized helps in smooth workouts. The best feature is that it is foldable and so can be stored easily when not in use. Whether youre a beginner or a fitness enthusiast, this treadmill provides a reliable and convenient platform to enhance your cardiovascular endurance, burn calories, and improve overall fitness.',
-      
-    
-    price: '₹ 53999',
-    rating: 4.5,
-    reviews: 25,
-  };
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Stack,
+  Button,
+  Paper,
+  InputBase,
+} from "@mui/material";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-  const handleAddToCart = () => {
-    // Implement the cart functionality here
-    console.log('Product added to cart:', product);
-  };
-  const handleBuyNow = (product) => {
-    // Implement the "Buy Now" functionality here
-    console.log('Product bought:', product);
-  };
+import SportNav from "../SportNav.jsx"
+import Footer from "../StoreFooter";
+
+function App() {
+
 
   const id = useParams();
   const [productDetails, setProductDetails] = useState();
-  const baseUrl = "https://mercury-breezy-cave.glitch.me/"
-
+  
   useEffect(() => {
-    fetch(`${baseUrl}${id.category}`)
-  })
     
-    
+    fetch(`https://fakestoreapi.com/products/${id.id}`)
+    .then((res) => res.json())
+    .then((product) => {
+      setProductDetails(product)
+      console.log(product)
+    })
+    .catch((err) => console.log(`Error occured during fetchong the data of ${id}`, err));
+  }, [id])
+
   return (
     <>
-    <Navbar />
-    <div className="image-gallery">
-      <div className="row">
-        <img src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_500,ar_3:4,c_fill/dpr_2/cultgear-content/8XW2NRkxF5tf42BaG8xZzy3U" alt=" 1"/>
-        <img src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_500,ar_3:4,c_fill/dpr_2/cultgear-content/4oc7bchn1nZVft1C8bFhZQsd" alt=" 2" />
-      </div>
-      <div className="row">
-        <img src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_500,ar_3:4,c_fill/dpr_2/cultgear-content/Uex2hq6U1VjyBk33uG9NpVWs" alt=" 3" />
-        <img src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_500,ar_3:4,c_fill/dpr_2/cultgear-content/qZbjnVUeqgjz14wiyBCQChRo" alt=" 4" />
-      </div>
-      <div className="row">
-        <img src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_500,ar_3:4,c_fill/dpr_2/cultgear-content/91M1fLCcV7ixaF2xMH3gMmYN" alt=" 6" />
-      </div>
-      <div className="product-info">
-        <h4>{product.mname}</h4>
-        <h1>{product.name}</h1>
-        <p>Price: {product.price}</p>
-        
-        <h3>Product Description</h3>
-        <p>{product.description}</p>
-        <p>Rating: {product.rating}</p>
-        <p>Number of Reviews: {product.reviews}</p>
-        <div>
-      <h2>{product.name}</h2>
-      <p>Price: {product.price}</p>
-      {/* Add other product details here */}
-      <AddToCartButton onClick={handleAddToCart} />
-    </div>
-    <div>
-      {/* Add other product details here */}
-      <BuyNowButton product={product} onBuyNow={handleBuyNow} />
-    </div>
-        <hr></hr>
-         <h3>PRODUCT DETAILS</h3>
-        <ul>
-        <li >MotorHorsepower:  5 HP, Warranty: 1 year on motor & manufacturing defects,3 years on frame</li>
-        <li>Motor Type: DC Motorized, Speed: 1-18 Km/hr, Max Weight Support: 140 Kgs</li>
-        <li>Foldable: Hydraulic, Lubrication: Manual</li>
-        <li>Transportation Wheels: Present, Bluetooth Connectivity: Yes</li>
-        <li>Toll-Free Number: 1800-572-6402 & 1800-5702-6303 </li>
-     
-      </ul >
-      <hr></hr>
-      
+    <SportNav />
+      <Box sx={{ padding: "1rem 0" }}>
+        <Container maxWidth="xl">
+          <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
+            <Grid container spacing={1}>
+              {productImages.map((img, index) => (
+                <Grid item xs={12} lg={6} key={index}>
+                  <img
+                    src={img}
+                    alt="item image"
+                    style={{ maxWidth: "768px", width: "100%" }}
+                  />
+                </Grid>
+              ))}
+            </Grid>
 
-        
-        <ul>
-        <li>Free delivery by Wednesday, 2nd August</li>
-        <li><b>No returns available</b></li>
-        <li>10 days exchange available</li>
-        <li><b>Pay on delivery available</b></li>
-      </ul>
-
-      </div>
-    </div>
-    <PrimaryFooter />
+            <Box
+              sx={{
+                padding: ".5rem 1rem",
+                width: "100%",
+                maxWidth: { lg: "500px" },
+              }}
+            >
+              <Stack direction="column" spacing={0.5}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    fontWeight: "500",
+                    textTransform: "uppercase",
+                    color: "#555",
+                  }}
+                >
+                  cult.sport
+                </Typography>
+                <ProductHeading productDetails={productDetails}/>
+                <ProductDetails />
+                <DeliveryDetails />
+              </Stack>
+            </Box>
+          </Stack>
+        </Container>
+        <Footer />
+      </Box>
     </>
-  
   );
-};
+}
 
-export default Singleproduct;
+export default App;
+
+const productImages = [
+  "https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_500,ar_3:4,c_fill/dpr_2/cultgear-content/nLsLM13ksU8JkxMUejPQaqtK",
+  "https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_500,ar_3:4,c_fill/dpr_2/cultgear-content/Zh2qn5yVtqMcuTV8bxmRKvKY",
+  "https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_500,ar_3:4,c_fill/dpr_2/cultgear-content/yQnBgxkBkVBLiT4uESQZf2Zg",
+  "https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_500,ar_3:4,c_fill/dpr_2/cultgear-content/3C9Evy3XKBCY22djcUpNGwdp",
+];
+
+function SizeSelect() {
+  const [size, setSize] = useState("S");
+  return (
+    <Box sx={{ padding: ".5rem 0" }}>
+      <Typography variant="subtitle2">
+        Choose Size: ({" "}
+        <a href="#" style={{ textDecoration: "none", color: "pink" }}>
+          Size Guide
+        </a>
+        )
+      </Typography>
+      <ToggleButtonGroup
+        value={size}
+        exclusive
+        onChange={(e, newSize) => setSize(newSize)}
+        aria-label="Choose Size"
+        size="large"
+      >
+        <ToggleButton value="S" aria-label="small">
+          S
+        </ToggleButton>
+        <ToggleButton value="M" aria-label="medium">
+          M
+        </ToggleButton>
+        <ToggleButton value="L" aria-label="large">
+          L
+        </ToggleButton>
+        <ToggleButton value="XL" aria-label="extra large" disabled>
+          XL
+        </ToggleButton>
+      </ToggleButtonGroup>
+    </Box>
+  );
+}
+
+function ProductHeading({productDetails}) {
+  return (
+    <Box sx={{ paddingBottom: "2rem" }}>
+      <Stack direction="column" spacing={1}>
+        <Typography variant="h5" sx={{ fontWeight: "600" }}>
+          {productDetails?.title}
+        </Typography>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <Typography variant="body1" sx={{ color: "#f13171" }}>
+            &#8377;{productDetails?.price}
+          </Typography>
+          <Typography variant="body1">
+            <s>&#8377;1799</s>
+          </Typography>
+          <Box
+            sx={{ color: "white", background: "#f5a623", padding: ".25rem" }}
+          >
+            36% OFF
+          </Box>
+        </Stack>
+        <Typography variant="body2" sx={{ color: "#777" }}>
+          This Typographic T-shirt is a surefire way to merge street fashion
+          with total comfort, and we&lsquo;re here for it. Featuring the classic
+          crew neckline, these T-shirts are hyper-versatile and on trend every
+          season. So why wait when you can revamp your casuals with striking
+          bold graphics!
+        </Typography>
+      </Stack>
+      {/* select size */}
+      <SizeSelect />
+      {/* add to cart and buy now buttons */}
+      <ActionBtns />
+    </Box>
+  );
+}
+
+function ActionBtns() {
+  return (
+    <Stack direction="row" spacing={2}>
+      <Button
+        variant="contained"
+        sx={{
+          borderRadius: "1.5rem",
+          width: "100%",
+          background: "#f7433d",
+          padding: ".5rem 0",
+        }}
+      >
+        Add to Cart
+      </Button>
+      <Button
+        variant="contained"
+        sx={{
+          borderRadius: "1.5rem",
+          width: "100%",
+          background: "#f7433d",
+          padding: ".5rem 0",
+        }}
+      >
+        Buy Now
+      </Button>
+    </Stack>
+  );
+}
+
+function ProductDetails() {
+  return (
+    <Box sx={{ padding: ".5rem 0" }}>
+      <Typography
+        variant="body1"
+        sx={{ textTransform: "uppercase", color: "#444" }}
+      >
+        Product Details
+      </Typography>
+      <List
+        sx={{
+          listStyleType: "disc",
+          listStylePosition: "inside",
+        }}
+      >
+        <ListItem dense sx={{ display: "list-item" }}>
+          Colour: Maroon
+        </ListItem>
+        <ListItem dense sx={{ display: "list-item" }}>
+          Fabric: 65% Cotton 35% Polyester
+        </ListItem>
+        <ListItem dense sx={{ display: "list-item" }}>
+          Graphic
+        </ListItem>
+        <ListItem dense sx={{ display: "list-item" }}>
+          Soft and Durable
+        </ListItem>
+      </List>
+      <hr />
+    </Box>
+  );
+}
+
+function DeliveryDetails() {
+  return (
+    <Box sx={{ padding: ".5rem 0" }}>
+      <Paper
+        component="form"
+        variant="outlined"
+        sx={{ p: "2px 4px", display: "flex", alignItems: "center" }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Enter Pincode"
+          inputProps={{ "aria-label": "Enter Pincode" }}
+        />
+        <Button variant="" sx={{ p: "10px" }}>
+          Check
+        </Button>
+      </Paper>
+
+      <List
+        sx={{
+          listStyleType: "disc",
+          listStylePosition: "inside",
+        }}
+      >
+        <ListItem dense sx={{ display: "list-item" }}>
+          Free delivery within 5-7 days
+        </ListItem>
+        <ListItem dense sx={{ display: "list-item" }}>
+          Easy 15 days return available
+        </ListItem>
+        <ListItem dense sx={{ display: "list-item" }}>
+          15 days exchange available
+        </ListItem>
+        <ListItem dense sx={{ display: "list-item" }}>
+          Pay on Delivery is not available
+        </ListItem>
+      </List>
+      <hr />
+    </Box>
+  );
+}

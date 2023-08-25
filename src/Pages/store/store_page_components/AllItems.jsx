@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import ItemsBox from "./ItemsBox";
 import FullSlider from "../../../Components/FullSlider";
+
 const AllItems = () => {
   const [shirts, setShirts] = useState([]);
   const [cycles, setCycles] = useState([]);

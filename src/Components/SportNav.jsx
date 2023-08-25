@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
+
 const SportNav = ({ top = 12, show = true }) => {
   const [cart, setCart] = useState(0);
   const [visible, setVisible] = useState(false);

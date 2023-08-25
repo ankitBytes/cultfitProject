@@ -53,17 +53,15 @@ const Slider = ({ arr, count = 4 }) => {
           <SwiperSlide key={el.id}>
             <Box
               cursor="pointer"
-              w="260px"
               shadow="base"
               rounded="xl"
-              overflow="hidden"
-              height={"50vh"}
               display={"flex"}
               flexDirection={"column"}
               justifyContent={"center"}
+              onClick={() => navigateProduct(el)}
             >
-              <Image src={el.image} height={"35vh"}/>
-              <Flex direction={"column"} justifyContent={"space-between"} height={"8vh"}>
+              <Image src={el.image} style={{width: '15vw'}}/>
+              <Flex direction={"column"} justifyContent={"space-between"} height={"12vh"}>
               <Box>
                 <Text fontSize="sm" fontWeight="semibold" color="gray.600">
                   {el.brand}

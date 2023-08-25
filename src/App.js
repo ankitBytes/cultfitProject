@@ -29,7 +29,7 @@ function App() {
           <Route path="/care" element={<Care />} />
           <Route path="/fitness" element={<Fitness />} />
           <Route path="/store" element={<ChakraProvider><Store /></ChakraProvider>}></Route>
-          <Route path="/product" element={<Singleproduct />} />
+          <Route path="/product/:id" element={<Singleproduct />} />
         </>
       </Routes>
     </BrowserRouter>
