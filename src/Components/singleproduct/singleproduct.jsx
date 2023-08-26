@@ -37,7 +37,6 @@ function App() {
 
   return (
     <>
-    <SportNav />
       <Box sx={{ padding: "1rem 0" }}>
         <Container maxWidth="xl">
           <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
